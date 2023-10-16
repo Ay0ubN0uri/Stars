@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.recycleview.adapter = adapter
         binding.recycleview.layoutManager = LinearLayoutManager(this)
         binding.recycleview.showShimmer()
-//        Handler(Looper.getMainLooper()).postDelayed({
-        init()
-//        }, 3000)
+        Handler(Looper.getMainLooper()).postDelayed({
+            init()
+        }, 3000)
 
         speechIntentResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -48,13 +48,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 res?.let { txt ->
                     adapter.filter.filter(txt[0].toString())
                 }
-//                if(res.isNullOrEmpty() && !res?.get(0).toString().isNullOrEmpty()){
-//                    adapter.filter.filter(res?.get(0).toString())
-//                }
             }
-
-
-//        setFabVisibility(false)
 
         binding.fab.setOnClickListener {
             adapter.submitList(viewModel.findAll().toMutableList())
@@ -70,7 +64,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     private fun init() {
-        val star = Star("hello", "", 5)
+        val star = Star("Ayoub Nouri", "", 5)
         viewModel.add(star)
         viewModel.add(
             Star(
@@ -86,6 +80,29 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 4
             )
         )
+        viewModel.add(
+            Star(
+                "Cristiano Ronaldo",
+                "https://i.pinimg.com/736x/30/20/70/30207020e7d78b47fdc7078f75002cff.jpg",
+                4
+            )
+        )
+        viewModel.add(
+            Star(
+                "Kali Robort",
+                "https://source.unsplash.com/200x200/?man",
+                3
+            )
+        )
+
+        viewModel.add(
+            Star(
+                "David Jhonsone",
+                "https://source.unsplash.com/200x200/?man",
+                3
+            )
+        )
+
         binding.recycleview.hideShimmer()
         Log.i("info", "init: ${viewModel.findAll()}")
         adapter.setFullList(viewModel.findAll())
